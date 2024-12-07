@@ -4,11 +4,22 @@
 public class MyString {
     public static void main(String args[]) {
         String hello = "hello";
-        System.out.println(countChar(hello, 'h'));
+        /*System.out.println(countChar(hello, 'h'));
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
-        //// Put your other tests here.
+        System.out.println(subsetOf("sap", "space"));
+        System.out.println(subsetOf("spa", "space"));
+        System.out.println(subsetOf("pass", "space"));
+        System.out.println(subsetOf("c", "space"));
+        System.out.println(subsetOf("", "space")); */
+        System.out.println(randomStringOfLetters(5));
+        System.out.println(randomStringOfLetters(10));
+        System.out.println(randomStringOfLetters(0)); 
+        /*System.out.println(remove("committee", "meet"));
+        System.out.println(remove("abc", "abc"));
+        System.out.println(remove("abc", "b"));
+        System.out.println(remove("hello", "")); */
     }
 
     /**
@@ -20,8 +31,13 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == ch) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -35,10 +51,30 @@ public class MyString {
      * @param str2 - a string
      * @return true is str1 is a subset of str2, false otherwise
      */
-    public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
-        return false;
-    }
+
+     public static boolean subsetOf(String str1, String str2) {
+        if (str1.length() == 0) {
+            return true;
+        }
+        if (str2.length() == 0) {
+            return false;
+        }
+        boolean isSubset = false;
+        for (int i = 0; i < str1.length(); i++) {
+            int times = countChar(str2, str1.charAt(i));
+            if (times == 0) {
+                return false;
+            } 
+            else {
+                if (times != countChar(str1, str1.charAt(i))) {
+                    return false;
+                }
+                isSubset = true;
+            }
+        }
+        return isSubset;
+     }
+
 
     /** Returns a string which is the same as the given string, with a space
      * character inserted after each character in the given string, except
@@ -49,8 +85,15 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+        String spacedStr = "";
+        for (int i = 0; i < str.length(); i++) {
+            if (i == (str.length()-1)) {
+                spacedStr += str.charAt(i);
+            } else {
+                spacedStr += str.charAt(i) + " ";
+            }
+        }
+        return spacedStr;
     }
   
     /**
@@ -64,8 +107,13 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+        String random = "";
+        for (int i=0; i < n; i++) {
+            int r = (int) ((Math.random()) * 26);
+            char rand = (char) (r + 97);
+            random += rand; 
+        }
+        return random;
     }
 
     /**
@@ -78,9 +126,30 @@ public class MyString {
      * @return a string consisting of str1 minus all the characters of str2
      */
     public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
-        return null;
+        String removed = "";
+        String str2removing = "";
+        for (int i =0; i < str1.length(); i++) {
+            if ((countChar(str2, str1.charAt(i))) == 0) {
+                removed += str1.charAt(i);
+            } else {
+                boolean decreased = false;
+                str2removing = "";
+                for (int j = 0; j < str2.length(); j++) {
+                    if ((str1.charAt(i) == str2.charAt(j)) && (decreased == false)) {
+                        decreased = true;
+                    }
+                    else {
+                        str2removing += str2.charAt(j);
+                    }
+                }
+                str2 = str2removing;
+            }
+        }
+        return removed;
     }
+
+
+
 
     /**
      * Returns a string consisting of the given string, with the given 
@@ -96,5 +165,6 @@ public class MyString {
          // Insert the character at the random index
          String result = str.substring(0, randomIndex) + ch + str.substring(randomIndex);
          return result;
+         //substring can be relevant
     }    
 }

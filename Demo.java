@@ -73,6 +73,7 @@ public class Demo {
 	}
 
 	public static void main(String[] args) {		
-		playGame();
+		//playGame();
+		System.out.println(getRandomWord());
 	}
 }
