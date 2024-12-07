@@ -112,8 +112,6 @@ public class MyString {
             int r = (int) ((Math.random()) * 26);
             char rand = (char) (r + 97);
             random += rand; 
-            System.out.println(random);
-
         }
         return random;
     }
